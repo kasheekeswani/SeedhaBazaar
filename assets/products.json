@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Aloo (Potatoes)",
+    "price": "₹20/kg",
+    "image": "https://www.tasteofhome.com/wp-content/uploads/2022/07/GettyImages-1224918845-e1658929817975.jpg?w=2036",
+    "description": "Yeh desi aloo hai – seedhe kisaan ke khet se! Har dish mein kam aate hain, chahe wo bhaji ho ya paratha. Bohot hi soft aur tasty.",
+    "availability": "In Stock",
+    "origin": "Agra, UP",
+    "harvestDate": "2025-04-10"
+  },
+  {
+    "name": "Chawal (Rice)",
+    "price": "₹60/kg",
+    "image": "https://bl-i.thgim.com/public/incoming/sh033z/article67113433.ece/alternates/LANDSCAPE_1200/IMG_bl22_rice_bag_2_1_3BBGUG9N.jpg",
+    "description": "Premium quality chawal, soft aur fluffy banta hai jab bhi pakao. Biryani aur plain chawal dono mein best taste aata hai.",
+    "availability": "In Stock",
+    "origin": "Raipur, Chhattisgarh",
+    "harvestDate": "2025-04-05"
+  },
+  {
+    "name": "Tamatar (Tomatoes)",
+    "price": "₹25/kg",
+    "image": "https://gardenandhappy.com/wp-content/uploads/2018/10/food-fresh-tomatoes-162830.jpg",
+    "description": "Lal-lal, juicy tamatar jo har sabzi ko banaye lajawab. Ye fresh aur pesticide-free hai. Chutney ke liye bhi best!",
+    "availability": "In Stock",
+    "origin": "Nashik, Maharashtra",
+    "harvestDate": "2025-04-11"
+  },
+  {
+    "name": "Pyaz (Onions)",
+    "price": "₹30/kg",
+    "image": "https://th.bing.com/th/id/OIP.QBSQ2BcQkdbd98qS2DfOjwHaEK?rs=1&pid=ImgDetMain",
+    "description": "Tear-free aur taste-full pyaz. Har kitchen ka must-have. Raita, bhaji, fry ya curry – sab mein use hota hai.",
+    "availability": "In Stock",
+    "origin": "Lasalgaon, Maharashtra",
+    "harvestDate": "2025-04-09"
+  },
+  {
+    "name": "Gehu (Wheat)",
+    "price": "₹32/kg",
+    "image": "https://i.pinimg.com/originals/2a/9e/5b/2a9e5b23806cc01bbef84e41cd58c61f.jpg",
+    "description": "High-fiber gehu jo roti ko banata hai soft aur healthy. Chakki peesaane ke liye perfect choice hai.",
+    "availability": "In Stock",
+    "origin": "Indore, MP",
+    "harvestDate": "2025-04-01"
+  },
+  {
+    "name": "Gajar (Carrots)",
+    "price": "₹35/kg",
+    "image": "https://th.bing.com/th/id/OIP.yPrYax2aPfa8Le0J4CyofQHaHM?rs=1&pid=ImgDetMain",
+    "description": "Lal rang ki crisp gajar, jisme hai health ka full dose. Halwa ho ya salad – sab ke liye perfect.",
+    "availability": "In Stock",
+    "origin": "Shimla, HP",
+    "harvestDate": "2025-04-07"
+  },
+  {
+    "name": "Phool Gobhi (Cauliflower)",
+    "price": "₹40/kg",
+    "image": "https://cdn.pixabay.com/photo/2022/02/16/09/22/cauliflower-7016398_1280.jpg",
+    "description": "Moti aur tight gobhi jo sabzi mein nahi girti. Paneer gobhi ho ya masala gobhi – sab mein taste top-notch.",
+    "availability": "In Stock",
+    "origin": "Sonipat, Haryana",
+    "harvestDate": "2025-04-06"
+  },
+  {
+    "name": "Matar (Green Peas)",
+    "price": "₹50/kg",
+    "image": "https://th.bing.com/th/id/OIP.3MXtqCrXJTpsANR9jEHsmAHaE6?rs=1&pid=ImgDetMain",
+    "description": "Sweet aur juicy matar, bina kisi chemical ke. Matar paneer ya fried rice mein badiya jaata hai.",
+    "availability": "Out of Stock",
+    "origin": "Muzaffarnagar, UP",
+    "harvestDate": "2025-04-02"
+  },
+  {
+    "name": "Patta Gobhi (Cabbage)",
+    "price": "₹28/kg",
+    "image": "https://static.fanpage.it/wp-content/uploads/sites/22/2019/05/cabbage1.jpg",
+    "description": "Green aur healthy cabbage jo stir-fry aur salad dono ke liye best hai. Bohot crisp aur fresh.",
+    "availability": "In Stock",
+    "origin": "Aligarh, UP",
+    "harvestDate": "2025-04-08"
+  },
+  {
+    "name": "Palak (Spinach)",
+    "price": "₹18/bundle",
+    "image": "https://th.bing.com/th/id/OIP.RU8jOiecHq4qrdgtIGA9RwHaE8?rs=1&pid=ImgDetMain",
+    "description": "Green leafy palak jo iron se bhara hai. Palak paneer, soup ya paratha ke liye perfect.",
+    "availability": "In Stock",
+    "origin": "Ahmedabad, Gujarat",
+    "harvestDate": "2025-04-12"
+  }
+] 

@@ -1,10 +1,12 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'pages/orders_page.dart';
 import 'pages/dashboard/farmer_dashboard.dart';
 import 'pages/dashboard/buyer_dashboard.dart';
 
 class HomePage extends StatefulWidget {
-  final String userType; // Either 'Farmer' or 'Buyer'
+  final String userType;
 
   const HomePage({super.key, required this.userType});
 
@@ -14,29 +16,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  List<dynamic> products = [];
+  bool isLoading = true;
 
-  static const List<Map<String, String>> products = [
-    {
-      'name': 'Potatoes',
-      'price': '₹20/kg',
-      'image': 'https://th.bing.com/th/id/R.b0ea390802c97d189c2152e5b1040a40?rik=7ppku4Y9f7fyWw&riu=http%3a%2f%2fwww.photos-public-domain.com%2fwp-content%2fuploads%2f2010%2f11%2fpotatoes.jpg&ehk=ppej%2bTYeB5zO5uvgoQuNWzypg9gESEnsGXkS7OQaYRo%3d&risl=&pid=ImgRaw&r=0',
-    },
-    {
-      'name': 'Rice',
-      'price': '₹60/kg',
-      'image': 'https://assets-global.website-files.com/64f700835515df24fda55fbd/659cce7edbabbfaa1b2e4445_parboiled.jpg',
-    },
-    {
-      'name': 'Tomatoes',
-      'price': '₹25/kg',
-      'image': 'https://gardenandhappy.com/wp-content/uploads/2018/10/food-fresh-tomatoes-162830.jpg',
-    },
-    {
-      'name': 'Onions',
-      'price': '₹30/kg',
-      'image': 'https://th.bing.com/th/id/R.d8c736d7731e57dddbeac3aa5e99ee1d?rik=cV6yIsCR%2fJRPug&riu=http%3a%2f%2fwww.almanac.com%2fsites%2fdefault%2ffiles%2fimage_nodes%2fonions.jpg&ehk=j9c2t0N3TYlDybNtpzOKj2StSAC6Nz3%2bVJD6BbBXxBc%3d&risl=&pid=ImgRaw&r=0',
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadProducts();
+  }
+
+  Future<void> _loadProducts() async {
+    final String jsonString =
+        await rootBundle.loadString('assets/products.json');
+    final data = jsonDecode(jsonString);
+    setState(() {
+      products = data; // No ['products'] since your JSON is a root-level list
+      isLoading = false;
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -50,7 +47,13 @@ class _HomePageState extends State<HomePage> {
         return Column(
           children: [
             _buildSearchBar(),
-            Expanded(child: _buildProductGrid(context)),
+            isLoading
+                ? const Expanded(child: Center(child: CircularProgressIndicator()))
+                : Expanded(
+                    child: products.isEmpty
+                        ? const Center(child: Text("No products available"))
+                        : _buildProductGrid(context),
+                  ),
           ],
         );
       case 1:
@@ -117,17 +120,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildProductCard(BuildContext context, Map<String, String> product) {
+  Widget _buildProductCard(BuildContext context, Map<String, dynamic> product) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
           context,
           '/product_detail',
           arguments: {
-            'name': product['name'],
-            'price': product['price'],
-            'image': product['image'],
-            'description': '${product['name']} are fresh and sourced directly from farms.',
+            'name': product['name'] ?? 'Unknown',
+            'price': product['price'] ?? 'N/A',
+            'image': product['image'] ?? '',
+            'description': product['description'] ?? '',
+            'features': product['features'] ?? [],
           },
         );
       },
@@ -141,7 +145,7 @@ class _HomePageState extends State<HomePage> {
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(16)),
               child: Image.network(
-                product['image']!,
+                product['image'] ?? '',
                 height: 120,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -152,7 +156,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                product['name']!,
+                product['name'] ?? '',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
@@ -160,7 +164,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                product['price']!,
+                product['price'] ?? '',
                 style: const TextStyle(color: Colors.green),
               ),
             ),

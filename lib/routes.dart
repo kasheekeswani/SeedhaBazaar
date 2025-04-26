@@ -7,7 +7,7 @@ import 'pages/checkout_page.dart';
 import 'pages/payment_page.dart';
 import 'pages/dashboard/farmer_dashboard.dart';
 import 'pages/dashboard/buyer_dashboard.dart';
-import 'pages/orders_page.dart'; // ✅ Order page
+import 'pages/orders_page.dart';
 
 Map<String, WidgetBuilder> appRoutes = {
   // 🔐 Auth Screens
@@ -20,10 +20,15 @@ Map<String, WidgetBuilder> appRoutes = {
   // 🛒 Product Detail (with arguments)
   '/product_detail': (context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final priceString = args['price'].toString();
+    final parsedPrice = double.tryParse(
+      priceString.replaceAll(RegExp(r'[^\d.]'), ''),
+    ) ?? 0.0;
+
     return ProductDetailPage(
       productName: args['name'],
       productImage: args['image'],
-      price: double.parse(args['price'].toString().replaceAll(RegExp(r'[^\d.]'), '')),
+      price: parsedPrice,
       description: args['description'],
     );
   },
