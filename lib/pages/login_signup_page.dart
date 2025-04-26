@@ -7,9 +7,15 @@ class LoginSignupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color plum = const Color(0xFF490839);
+    final Color orange = const Color(0xFFFF5C00);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login / Signup"),
+        title: const Text(
+          "Login / Signup",
+          style: TextStyle(fontFamily: 'Poppins'),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -20,7 +26,7 @@ class LoginSignupPage extends StatelessWidget {
             }
           },
         ),
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: plum,
         foregroundColor: Colors.white,
         elevation: 2,
       ),
@@ -29,10 +35,7 @@ class LoginSignupPage extends StatelessWidget {
         padding: const EdgeInsets.all(24.0),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFFE8F5E9), // Light green
-              Color(0xFFF1F8E9), // Softer green
-            ],
+            colors: [Color(0xFFFFA7EC), Color(0xFFFCE4EC)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -41,69 +44,88 @@ class LoginSignupPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 40),
-            Text(
+            const Icon(Icons.local_florist, size: 64, color: Color(0xFFCB1D85)),
+            const SizedBox(height: 20),
+            const Text(
               "Welcome to SeedhaBazaar",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Colors.green.shade900,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "(${userType.toUpperCase()})",
-              style: TextStyle(
-                fontSize: 18,
-                fontStyle: FontStyle.italic,
-                color: Colors.green.shade800,
+                color: Color(0xFFCB1D85),
+                fontFamily: 'Poppins',
               ),
             ),
             const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/credentials');
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
-                backgroundColor: Colors.green.shade700,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 5,
-              ),
-              child: const Text("Login as Farmer", style: TextStyle(fontSize: 16)),
+            _buildAnimatedButton(
+              label: "Login as $userType",
+              color: orange,
+              context: context,
+              route: null, // Leads nowhere
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/credentials');
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
-                backgroundColor: Colors.green.shade600,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 5,
-              ),
-              child: const Text("Login as Buyer", style: TextStyle(fontSize: 16)),
+            _buildAnimatedButton(
+              label:
+                  "Login as ${userType.toLowerCase() == 'farmer' ? 'Buyer' : 'Farmer'}",
+              color: plum,
+              context: context,
+              route: null, // Leads nowhere
             ),
             const SizedBox(height: 30),
             TextButton(
               onPressed: () {
-                // TODO: Navigate to signup screen
+                Navigator.pushNamed(context, '/credentials');
               },
-              child: const Text(
+              child: Text(
                 "Don't have an account? Sign up",
                 style: TextStyle(
                   fontSize: 14,
                   decoration: TextDecoration.underline,
-                  color: Colors.black87,
+                  fontFamily: 'Poppins',
+                  color: plum,
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAnimatedButton({
+    required String label,
+    required Color color,
+    required BuildContext context,
+    String? route,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        if (route != null) {
+          Navigator.pushNamed(context, route);
+        }
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.4),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

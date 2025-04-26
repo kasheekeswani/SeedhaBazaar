@@ -8,42 +8,95 @@ class CheckoutPage extends StatelessWidget {
     final TextEditingController addressController = TextEditingController();
     final TextEditingController phoneController = TextEditingController();
 
+    final Color primaryColor = const Color(0xFF490839); // Plum
+    final Color accentColor = const Color(0xFFFF5C00); // Orange
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Checkout")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      appBar: AppBar(
+        title: const Text(
+          "Checkout",
+          style: TextStyle(fontFamily: 'Poppins'),
+        ),
+        backgroundColor: primaryColor,
+        foregroundColor: Colors.white,
+        elevation: 2,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Delivery Details",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: primaryColor,
+                fontFamily: 'Poppins',
+              ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             TextField(
               controller: addressController,
-              decoration: const InputDecoration(
+              style: const TextStyle(fontFamily: 'Poppins'),
+              decoration: InputDecoration(
                 labelText: "Delivery Address",
-                border: OutlineInputBorder(),
+                labelStyle: TextStyle(color: primaryColor, fontFamily: 'Poppins'),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: accentColor),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               maxLines: 3,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             TextField(
               controller: phoneController,
-              decoration: const InputDecoration(
-                labelText: "Phone Number",
-                border: OutlineInputBorder(),
-              ),
               keyboardType: TextInputType.phone,
+              style: const TextStyle(fontFamily: 'Poppins'),
+              decoration: InputDecoration(
+                labelText: "Phone Number",
+                labelStyle: TextStyle(color: primaryColor, fontFamily: 'Poppins'),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: accentColor),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 40),
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/payment');
-                },
-                child: const Text("Proceed to Payment"),
+              child: GestureDetector(
+                onTap: () => Navigator.pushNamed(context, '/payment'),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                  decoration: BoxDecoration(
+                    color: accentColor,
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: accentColor.withOpacity(0.4),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    "Proceed to Payment",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

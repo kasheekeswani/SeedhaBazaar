@@ -26,27 +26,56 @@ class OrdersPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Orders'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: const Color(0xFF490839), // Plum
         foregroundColor: Colors.white,
       ),
+      backgroundColor: const Color(0xFFFFA7EC).withOpacity(0.1), // light Candy tone
       body: ListView.builder(
         itemCount: orders.length,
         itemBuilder: (context, index) {
           final order = orders[index];
+
+          Color statusColor;
+          switch (order['status']) {
+            case 'Delivered':
+              statusColor = const Color(0xFFCB1D85); // Pink
+              break;
+            case 'Shipped':
+              statusColor = const Color(0xFFF94500); // Carrot
+              break;
+            default:
+              statusColor = Colors.grey.shade700;
+          }
+
           return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            color: Colors.white,
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListTile(
-              leading: const Icon(Icons.shopping_cart),
-              title: Text(order['product']!),
-              subtitle: Text('Ordered on: ${order['date']}'),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              leading: const Icon(Icons.shopping_cart, color: Color(0xFF490839)),
+              title: Text(
+                order['product']!,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Color(0xFF490839), // Plum
+                ),
+              ),
+              subtitle: Text(
+                'Ordered on: ${order['date']}',
+                style: const TextStyle(
+                  color: Colors.black54,
+                ),
+              ),
               trailing: Text(
                 order['status']!,
                 style: TextStyle(
-                  color: order['status'] == 'Delivered'
-                      ? Colors.green
-                      : order['status'] == 'Shipped'
-                          ? Colors.orange
-                          : Colors.red,
+                  fontWeight: FontWeight.bold,
+                  color: statusColor,
                 ),
               ),
             ),
